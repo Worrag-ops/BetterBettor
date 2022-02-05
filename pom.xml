@@ -44,33 +44,44 @@
         </configuration>
       </plugin>
       <plugin>
-            <!-- Делаем исполняемый jar файл -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.1.0</version>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <mainClass>application.Main</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
+        <!-- Делаем исполняемый jar файл -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+            <archive>
+                <manifest>
+                    <addClasspath>true</addClasspath>
+                    <mainClass>application.Main</mainClass>
+                    <packageName>application</packageName>
+                    <classpathPrefix>lib</classpathPrefix>
+                </manifest>
+            </archive>
+        </configuration>
       </plugin>
        <plugin>
              <!-- Запаковывание зависимостей в один jar файл -->
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-shade-plugin</artifactId>
              <version>3.1.0</version>
-             <executions>
-                 <execution>
-                     <phase>package</phase>
-                     <goals>
-                         <goal>shade</goal>
-                     </goals>
-                 </execution>
-             </executions>
-      </plugin>
-      <plugin>
+		     <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <transformers>
+					       <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+					       <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>application.Main</mainClass>
+                           </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+	    </plugin>
+	    <plugin>
 	    <artifactId>maven-resources-plugin</artifactId>
 	    <version>2.6</version>
 	    <executions>
