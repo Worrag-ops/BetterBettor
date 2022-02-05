@@ -97,12 +97,6 @@
 	                </outputDirectory>
 	                <resources>
 	                    <resource>
-	                        <directory>${basedir}/src/main/resources/logo/*</directory>
-	                        <includes>
-	                            <include>**/*.png</include>
-	                        </includes>
-	                    </resource>
-	                    <resource>
 	                        <directory>${basedir}/src/main/resources/icon</directory>
 	                        <includes>
 	                            <include>**/*.png</include>
