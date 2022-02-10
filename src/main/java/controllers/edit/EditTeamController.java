@@ -44,7 +44,7 @@ public class EditTeamController implements Initializable {
 	
 	private int team_id; 
 	private Team uneditedTeam;
-	private final long SIZE_LIMIT = 15360;
+	private final long SIZE_LIMIT = 20500;
 	private File logoFile = null;
 	
 	
@@ -73,7 +73,7 @@ public class EditTeamController implements Initializable {
     			errorLabel.setText("");
         	} else {
     			errorLabel.setTextFill(Paint.valueOf("RED"));
-    			errorLabel.setText("Вес лого не должен превышать 15 кб!");
+    			errorLabel.setText("Вес лого не должен превышать 20 кб!");
     			logoFile = null;
         	}
         }
