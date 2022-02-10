@@ -44,6 +44,7 @@ public class EditTeamController implements Initializable {
 	
 	private int team_id; 
 	private Team uneditedTeam;
+	private final long SIZE_LIMIT = 15360;
 	private File logoFile = null;
 	
 	
@@ -62,13 +63,20 @@ public class EditTeamController implements Initializable {
 		FileChooser fc = new FileChooser();
 		fc.setTitle("Select logo");
 		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG", "*.png"));
-
-		logoFile = fc.showOpenDialog(logoPickButton.getScene().getWindow());
-        if (logoFile != null) {
-            logoPathField.setText(logoFile.getAbsolutePath());
-            logoImage.setImage(new Image(logoFile.toURI().toURL().toString()));
-        }
 		
+		logoFile = fc.showOpenDialog(logoPickButton.getScene().getWindow());
+		
+        if (logoFile != null) {
+        	if (logoFile.length() <= SIZE_LIMIT) {
+        		logoPathField.setText(logoFile.getAbsolutePath());
+        		logoImage.setImage(new Image(logoFile.toURI().toURL().toString()));
+    			errorLabel.setText("");
+        	} else {
+    			errorLabel.setTextFill(Paint.valueOf("RED"));
+    			errorLabel.setText("Вес лого не должен превышать 15 кб!");
+    			logoFile = null;
+        	}
+        }
 	}
 	
 	@FXML
