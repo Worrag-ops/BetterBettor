@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import h2.ConnectH2;
 import h2.H2EntityIdExtractor;
 
-public class Team {
+public class Team implements Comparable <Team>{
 	private int id = 0;
 	private String name;
 	private Discipline discipline;
 	private BigDecimal profit;
-	private String logoPath;
+	private String logoPath="";
 
 	public Team (int id, String name, Discipline discipline, BigDecimal profit, String logoPath) {
 		this(name, discipline, profit, logoPath);
@@ -106,20 +106,6 @@ public class Team {
 		}
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null || obj.getClass() != this.getClass())
-            return false;
-		Team t = (Team) obj;
-		if (!this.name.equals(t.getName()) || !this.getDiscipline().equals(t.getDiscipline()))
-            return false;			
-		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return (name + " " + discipline.getName() + " " + String.valueOf(profit));
-	}
 
 	public int getId() {
 		return id;
@@ -136,4 +122,31 @@ public class Team {
 	public void setLogoPath(String logoPath) {
 		this.logoPath = logoPath;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass())
+            return false;
+		Team t = (Team) obj;
+		if (!this.name.equals(t.getName()) || !this.getDiscipline().equals(t.getDiscipline()))
+            return false;			
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return (name + " " + discipline.getName() + " " + String.valueOf(profit));
+	}
+	
+	@Override
+	public int compareTo(Team anotherTeam) {
+		String teamName = this.getName();
+		String anotherTeamName = anotherTeam.getName();
+		int result = teamName.compareTo(anotherTeamName);
+		if (result == 0) {
+			result = this.getDiscipline().compareTo(anotherTeam.getDiscipline());
+		}
+		return result;
+	}
+
 }

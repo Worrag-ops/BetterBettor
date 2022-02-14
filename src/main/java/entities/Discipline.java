@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import h2.ConnectH2;
 import h2.H2EntityIdExtractor;
 
-public class Discipline {
+public class Discipline implements Comparable<Discipline> {
 	private int id = 0;
 	private String name;
 	private String discType;
@@ -78,6 +78,15 @@ public class Discipline {
 		}			
 	}
 	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null || obj.getClass() != this.getClass())
@@ -93,11 +102,8 @@ public class Discipline {
 		return (name + " " + discType);
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	@Override
+	public int compareTo(Discipline anotherDiscipline) {
+		return this.getName().compareTo(anotherDiscipline.getName());
 	}
 }

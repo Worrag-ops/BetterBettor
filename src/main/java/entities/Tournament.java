@@ -10,7 +10,7 @@ import java.util.List;
 import h2.ConnectH2;
 import h2.H2EntityIdExtractor;
 
-public class Tournament {
+public class Tournament implements Comparable<Tournament>{
 	private int id = 0;
 	private String name;
 	private BigDecimal profit;
@@ -156,5 +156,10 @@ public class Tournament {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Override
+	public int compareTo(Tournament anotherTour) {
+		return this.getName().compareTo(anotherTour.getName());
 	}
 }
