@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import entities.Discipline;
@@ -64,6 +65,7 @@ public class Tournaments {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		Collections.sort(tourList);
 	}	
 	
 	public static Tournaments getInstance() {
